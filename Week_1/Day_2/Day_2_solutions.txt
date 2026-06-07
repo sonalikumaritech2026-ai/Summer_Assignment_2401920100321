@@ -1,0 +1,50 @@
+//Maximum Subarray
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int sum = nums[0];
+        int crr = nums[0];
+
+        for (int i = 1; i < nums.size(); i++) {
+            crr = max(nums[i], crr + nums[i]);
+            sum = max(sum, crr);
+        }
+
+        return sum;
+
+    }
+};
+
+
+//Contains Duplicate
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_set<int> present;
+        for (int num : nums) {
+            if (present.count(num) > 0)
+                return true;
+            present.insert(num);
+        }
+        return false;
+
+    }
+};
+
+//Maximum Average Subarray
+class Solution {
+public:
+    double findMaxAverage(vector<int>& nums, int k) {
+        int sum = 0;
+        for (int i = 0; i < k; i++) sum += nums[i];
+        int msum = sum;
+        
+        for (int i = k; i < nums.size(); i++) {
+            sum = sum - nums[i - k] + nums[i];
+            msum = max(msum, sum);
+        }
+        
+        double ans= (double)msum / k;
+        return ans;
+    }
+};
