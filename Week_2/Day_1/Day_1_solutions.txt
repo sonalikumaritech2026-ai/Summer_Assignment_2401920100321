@@ -1,0 +1,39 @@
+//VALID ANAGARM
+class Solution {
+public:
+    bool isAnagram(string a, string b) {
+        if (a.size() != b.size())
+            return false;
+        sort(a.begin(), a.end());
+        sort(b.begin(), b.end());
+        return a == b;    }
+};
+
+//FIRST UNIQUE CHARACTER IN A STRING
+class Solution {
+public:
+    int firstUniqChar(string s) {
+        unordered_map<char, int> mp;
+        for (char ch : s)
+            mp[ch]++;
+        for (int i = 0; i < s.size(); i++) {
+            if (mp[s[i]] == 1)
+                return i;}
+        return -1;
+    }
+};
+
+//RANSOM NOTE
+class Solution {
+public:
+    bool canConstruct(string ransm, string magazn) {
+        int freq[26] = {};
+
+        for (char c : magazn)
+
+            freq[c - 'a']++;
+        for (char c : ransm) {
+            if (--freq[c - 'a'] < 0)return false;
+        }return true;
+    }
+};
