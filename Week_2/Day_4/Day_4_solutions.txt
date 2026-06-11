@@ -1,0 +1,43 @@
+//REVERSE WORDS IN STRING
+class Solution{
+public:
+    string reverseWords(string s) {
+        stringstream ss(s);
+        string t,res;
+
+        while(ss>>t){
+            reverse(t.begin(),t.end());
+                res+=t+" ";
+    }
+
+
+        return res.substr(0,res.size()-1);
+    }
+};
+
+//GENERATE PARANTHESIS
+class Solution{
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> ans;
+
+        solve(0,0,"",n,ans);
+
+        return ans;
+    }
+
+private:
+    void solve(int a,int b,string cur,int n,vector<string>& ans){
+
+        if(a==b && a+b==2*n){
+            ans.push_back(cur);
+            return;
+        }
+
+        if(a<n)
+            solve(a+1,b,cur+"(",n,ans);
+
+        if(b<a)
+            solve(a,b+1,cur+")",n,ans);
+    }
+};
