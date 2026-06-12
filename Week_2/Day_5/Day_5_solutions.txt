@@ -1,0 +1,70 @@
+//GROUP ANAGRAMS
+class Solution{
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& v) {
+        unordered_map<string,vector<string>> mp;
+        for(string s:v) {
+            vector<int> cnt(26,0);
+
+            for(char c:s)
+                cnt[c-'a']++;
+            string key="";
+            for(int x:cnt)
+                key+=to_string(x)+"#";
+
+
+            mp[key].push_back(s);        }
+
+        vector<vector<string>> ans;
+        for(auto &it:mp){
+            ans.push_back(it.second);
+    }
+        return ans;
+    }
+};
+
+//STRING COMPRESSION
+class Solution{
+public:
+    int compress(vector<char>& v) {
+        int ans=0;
+
+        for(int i=0;i<v.size();) {
+            char ch=v[i];
+            int cnt=0;
+            while(i<v.size() && v[i]==ch){
+                cnt++;
+                i++;}
+
+            v[ans++]=ch;
+            if(cnt>1){
+                for(char c:to_string(cnt))
+                    v[ans++]=c;}
+        }   return ans;
+    }
+};
+
+//LONGEST PALLINDROMIC STRING
+class Solution{
+public:
+    string longestPalindrome(string s) {
+        if(s.size()<=1)
+            return s;
+        auto get=[&](int l,int r){
+            while(l>=0 && r<s.size() && s[l]==s[r]){
+                l--;
+                r++;}
+            return s.substr(l+1,r-l-1);
+        };
+        string ans=s.substr(0,1);
+
+        for(int i=0;i<s.size()-1;i++) {
+            string a=get(i,i);
+            string b=get(i,i+1);
+            if(a.size()>ans.size())
+                ans=a;
+            if(b.size()>ans.size())
+                ans=b;
+    }
+        return ans;}
+};
